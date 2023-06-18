@@ -1,0 +1,14 @@
+/* Los estilos definidos en index.css se aplican a nivel global en la aplicación,
+lo que significa que afectan a todos los componentes y elementos dentro de la aplicación. */
+/* Puedes utilizar index.css para definir estilos generales de la aplicación, como estilos de reseteo,
+fuentes globales, colores predeterminados, estilos de contenedores principales, etc. */
+/* Es común utilizar index.css para importar bibliotecas de estilos externas o globales, como Bootstrap o Material UI. */
+
+body{
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 200;
+}
