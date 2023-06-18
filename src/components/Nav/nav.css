@@ -4,6 +4,7 @@ nav{
     width: 100vw;
     height: 2.2rem;
     background-color: rgb(26, 26, 26);
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
 }
 
 nav ul{
