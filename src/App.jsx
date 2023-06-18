@@ -1,5 +1,8 @@
+// Importar componentes propios
+import Nav from './components/Nav';
+
 // Importar CSS Global
-import './App.css'
+import './App.css';
 
 function App() {
   return (
@@ -15,6 +18,10 @@ function App() {
           <li className="link">Link</li>
         </div>
       </header>
+
+      {/* Uso de componentes */}
+      {/* Componente simple */}
+      <Nav/>
     </>
   )
 }

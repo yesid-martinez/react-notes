@@ -1,4 +1,4 @@
-# Repositorio de apuntes de TypeScript
+# Repositorio de apuntes de React
 
 Este repositorio es una colección de apuntes de TypeScript, donde guardo mis notas sobre el lenguaje de programación y conceptos relacionados. Aquí encontrarás información útil y organizada para aprender y repasar TypeScript.
 

@@ -1,0 +1,30 @@
+/* Css por componente */
+
+nav{
+    width: 100vw;
+    height: 2.2rem;
+    background-color: rgb(26, 26, 26);
+}
+
+nav ul{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+}
+
+ul li{
+    width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: font-size 0.4 ease-in;
+    transition: background-color 0.4 ease-in;
+}
+
+ul li:hover{
+    background-color: rgb(20, 20, 20);
+    font-size: 1.1rem;
+
+}
