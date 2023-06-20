@@ -37,7 +37,7 @@
 
 .lista-tareas li{
     display: grid;
-    grid-template-columns: 1fr 4rem;
+    grid-template-columns: 1fr  3rem 3rem;
     align-items: center;
     width: 30rem;
     min-height: 3rem;
@@ -47,8 +47,16 @@
     font-size: 1rem;
     font-weight: 300;
     font-style: oblique;
-    background-color: #212121;
+    background: linear-gradient(to top right, #5b5b5b, #c2c2c2);
+    color: #000000;
     border-radius: 5px;
+}
+
+.tarea-terminada{
+    background: none !important;
+    background: linear-gradient(to top right, #1b1b1b, #3d3d3d) !important;
+    color: #c4c4c4 !important;
+    text-decoration: line-through;
 }
 
 .degradado-tareas {

@@ -15,10 +15,6 @@ function App() {
   // ` tareas` => Valor inicial -> useState( valorInicial )
   // `setTareas`: función que actualiza el estado de `tareas`
   const [tareas, setTareas] = useState([
-    // Ejemplo de tareas
-    { id: 1, titulo: "Running" },
-    { id: 2, titulo: "Programming" },
-    { id: 3, titulo: "Reading" } 
   ]);
   // Estado del componente: inmutable
 
@@ -39,6 +35,15 @@ function App() {
       return currentState.filter((tarea) => tarea.id !== id );  
     }); 
 
+  };
+
+  const checkTask = (id) => {
+    setTareas( (currentState) => {
+      // Si la condición se cumple, se devuelve la tarea creando el atributo `tarea-terminada` con valor: `undefined`,
+      // `undefined` es un falsy value, por lo tanto, su opuesto será el valor`true`.
+      // Si la condición es falsa, se devuelve la tarea original sin realizar cambios.
+      return currentState.map( tarea => tarea.id === id ? {... tarea, terminada: !tarea.terminada } : tarea);
+    });
   };
 
   return (
@@ -69,6 +74,7 @@ function App() {
           <Tareas
           listaTareas={tareas}
           onDelete={deleteTask}
+          onToggle={checkTask}
           mostrarTodas={mostrarTodas}
           setMostrarTodas={setMostrarTodas}
           />

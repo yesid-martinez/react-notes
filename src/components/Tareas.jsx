@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Tarea from './Tarea';
 import './Tareas/tareas.css';
 
-const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas}) => {
+const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle}) => {
 
   // Controla los cambios en el componente para mostrar y ocultar el scrollbar
   useEffect(() => {
@@ -23,7 +23,9 @@ const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas}) => {
               <Tarea
               key={tarea.id}
               task={tarea}
-              onDeleteClick={onDelete}/>
+              onDeleteClick={onDelete}
+              onToggle={onToggle}
+              />
             ))}
         </ul>
         <div className='degradado-tareas'></div>
