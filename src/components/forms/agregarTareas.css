@@ -1,14 +1,13 @@
-#content-layout{
+.content-layout{
     display: flex;
     align-items: center;
     justify-content: space-around;
     width: 100vw;
     height: 100%;
     margin-top: 2.5rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   
-  form{
+.content-layout form{
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -19,16 +18,17 @@
     box-shadow: 4px 3px 3px rgba(255, 255, 255, 0.1);
   }
   
-  form h2{
+.content-layout form h2{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 6rem;
     font-size: 2.6rem;
+    font-weight: 500;
   }
   
-  form fieldset:first-of-type{
+.content-layout form fieldset:first-of-type{
     display: flex;
     justify-content: center;
     width: 90%;
@@ -36,7 +36,7 @@
     border: none;
   }
   
-  form fieldset:first-of-type input{
+.content-layout form fieldset:first-of-type input{
     width: 20rem;
     height: 2.5rem;
     border: none;
@@ -52,7 +52,7 @@
     color: #ffff;
   }
 
-  form fieldset:first-of-type input:focus{
+.content-layout form fieldset:first-of-type input:focus{
     outline: none;
     width: 22rem;
     height: 3rem;
@@ -61,35 +61,28 @@
     background-color: #212121;
   }
 
-  form fieldset:first-of-type input::placeholder {
+.content-layout form fieldset:first-of-type input::placeholder {
     font-size: 1rem;
   }
-  
-  form fieldset:nth-of-type(2){
+    
+.content-layout form fieldset:nth-of-type(2){
     display: flex;
     justify-content: center;
     width: 90%;
     border: none;
   }
 
-  form fieldset:nth-of-type(2) input{
+.content-layout form fieldset:nth-of-type(2) input{
     width: 20rem;
     height: 2.5rem;
     border: none;
     border-radius: 2px;
+    font-size: 1rem;
     background: radial-gradient(circle, #787878 ,#474747);
     color:  #000000;
     transition: font-size .1s ease-in;
   }
-  form fieldset:nth-of-type(2) input:hover{
+.content-layout form fieldset:nth-of-type(2) input:hover{
     background: radial-gradient(circle,#929191, #5f5f5f);
-    font-size: 1rem;
-  }
-
-  #layout-tareas{
-    width: 45vw;
-    height: 70vh;
-    background: linear-gradient(to bottom left, #1a1a1a, #000000);
-    border-radius: 1rem;
-    box-shadow: 4px 3px 3px rgba(255, 255, 255, 0.1);
-  }
+    font-size: 1.05rem;
+}

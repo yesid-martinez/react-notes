@@ -14,7 +14,7 @@ nav ul{
     margin: 0;
 }
 
-ul li{
+nav ul li{
     width: 10rem;
     display: flex;
     align-items: center;
@@ -24,7 +24,7 @@ ul li{
     transition: background-color 0.4 ease-in;
 }
 
-ul li:hover{
+nav ul li:hover{
     background-color: rgb(20, 20, 20);
     font-size: 1.1rem;
 

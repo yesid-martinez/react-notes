@@ -36,12 +36,13 @@ const AgregarTareasForm = ({onAddTask}) => {
   return (
     <>
     <form>
-        <h2>Tasks Manager <FaTasks size={40} style={{ margin: ' 10 0 0 10' }}/></h2>
+        <h2>Tasks manager <FaTasks size={40} style={{ margin: ' 10 0 0 10' }}/></h2>
         <fieldset>
             <label htmlFor=""></label>
             <input
             type="text" 
             placeholder="Enter new task"
+            maxLength={40}  
             value={titulo}
             // El input tiene un valor vinculado al estado titulo.
             // Se actualiza mediante la función setTitulo cuando su valor cambia.
@@ -50,6 +51,7 @@ const AgregarTareasForm = ({onAddTask}) => {
         </fieldset>
         <fieldset>
             <input type="submit"
+            value="Save task"
             onClick={saveTask}
             />
         </fieldset>

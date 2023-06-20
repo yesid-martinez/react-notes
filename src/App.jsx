@@ -1,9 +1,11 @@
 // Importar componentes de React
 import { useState } from 'react';
+// Hook useState => Agrega estado a un componente funcional.
 
 // Importar componentes propios
 import Nav from './components/Nav';
 import AgregarTareasForm from './components/forms/agregarTareasForm';
+import Tareas from './components/Tareas';
 
 // Importar CSS Global
 import './App.css';
@@ -20,10 +22,23 @@ function App() {
   ]);
   // Estado del componente: inmutable
 
-  // Recibe como parámetro el objeto `New Task` del componente `AgregarTareasForm`
+  const [mostrarTodas, setMostrarTodas] = useState(false);
+
+  // Recibe como parámetro el objeto `New Task` desde el componente `AgregarTareasForm`
   const agregarTarea = (nuevaTarea) => {
-    // Actualiza el estado de las tareas
+    // Actualiza el estado de las tareas con `setTareas`
     setTareas( [... tareas, nuevaTarea] ); 
+  };
+
+  // Recibe como parámetro el valor id de la tarea desde el componente `Tarea`
+  const deleteTask = (id) => {
+    // Modifica el estado de `tareas`
+    // La función dentro de setTareas recibe como parámetro el estado actual de las tareas (currentState)
+    setTareas( (currentState) => {
+      // Devuelve el nuevo estado actualizado => Devuelve todas las tareas a excepción de la tarea actual 
+      return currentState.filter((tarea) => tarea.id !== id );  
+    }); 
+
   };
 
   return (
@@ -44,13 +59,19 @@ function App() {
         {/* Componente simple */}
         <Nav/>
 
-        <div id="content-layout">
+        <div className="content-layout">
           {/* Componente con props(atributos) */}
           <AgregarTareasForm
           // Prop `onAddTask` se envía al componente hijo para comunicarse con el componente padre
           // La función `agregarTarea` se pasa como valor de la prop `onAddTask`
           onAddTask={agregarTarea}/>
-          <div id="layout-tareas"></div>
+
+          <Tareas
+          listaTareas={tareas}
+          onDelete={deleteTask}
+          mostrarTodas={mostrarTodas}
+          setMostrarTodas={setMostrarTodas}
+          />
         </div>
       </>
   )
