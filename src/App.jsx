@@ -46,6 +46,18 @@ function App() {
     });
   };
 
+  const markAsCompleted = (id) => {
+    setTareas((currentState) => {
+      return currentState.map((tarea) => {
+        // Si la tarea coincide con el ID proporcionado y no está marcada como terminada, la marca como terminada.
+        if (tarea.id === id) {
+          return { ...tarea, terminada: !tarea.terminada };
+        }
+        return tarea;
+      });
+    });
+  };
+
   return (
     <>
       {/* HTML puro */}
@@ -75,6 +87,7 @@ function App() {
           listaTareas={tareas}
           onDelete={deleteTask}
           onToggle={checkTask}
+          onCheckTask={markAsCompleted}
           mostrarTodas={mostrarTodas}
           setMostrarTodas={setMostrarTodas}
           />

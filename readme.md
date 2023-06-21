@@ -33,3 +33,6 @@ Puedes instalarlas ejecutando los siguiente comandos:
 ## Visualización del comportamiento de los Hooks con la extensión de React Developer Tools
 
 Este repositorio incluye ejemplos de uso de Hooks en React. Para ver cómo funcionan los Hooks en tiempo real, puedes utilizar la extensión de React Developer Tools para Google Chrome.
+
+# Task Manager (Gestor de tareas)
+Para facilitar el entendimiento de los apuntes, se implementó un task manager sencillo en el proyecto. Este task manager permite agregar, eliminar y marcar tareas como terminadas. Además, utiliza un estilo CSS simple.

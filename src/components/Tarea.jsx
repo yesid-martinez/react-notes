@@ -3,7 +3,7 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { FaCheckCircle } from "react-icons/fa";
 import '../components/Tareas/tareas.css'
 
-const Tarea = ({task, onDeleteClick, onToggle}) => {
+const Tarea = ({task, onDeleteClick, onToggle, onCheckTask}) => {
 
     return (
       <li
@@ -14,16 +14,18 @@ const Tarea = ({task, onDeleteClick, onToggle}) => {
         {task.titulo}
 
         {task.terminada ?(
-        <FaCheckCircle/> 
-        ) : (
-        <FaRegCheckCircle 
+        <FaCheckCircle
+        onClick={() => onCheckTask(task.id)}
         style={{cursor: "pointer"}}
-          
+        /> 
+        ) : (
+        <FaRegCheckCircle
+        onClick={() => onCheckTask(task.id)}
+        style={{cursor: "pointer"}}
         />)}
 
         <FaTrashAlt
         onClick={() => onDeleteClick(task.id)}
-        className="icon"
         style={{cursor: "pointer"}}
         />
       </li>

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Tarea from './Tarea';
 import './Tareas/tareas.css';
 
-const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle}) => {
+const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle, onCheckTask}) => {
 
   // Controla los cambios en el componente para mostrar y ocultar el scrollbar
   useEffect(() => {
@@ -25,6 +25,7 @@ const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle}
               task={tarea}
               onDeleteClick={onDelete}
               onToggle={onToggle}
+              onCheckTask={onCheckTask}
               />
             ))}
         </ul>
