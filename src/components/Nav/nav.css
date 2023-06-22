@@ -4,6 +4,7 @@ nav{
     width: 100vw;
     height: 2.2rem;
     background-color: rgb(26, 26, 26);
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
 }
 
 nav ul{
@@ -13,7 +14,7 @@ nav ul{
     margin: 0;
 }
 
-ul li{
+nav ul li{
     width: 10rem;
     display: flex;
     align-items: center;
@@ -23,8 +24,8 @@ ul li{
     transition: background-color 0.4 ease-in;
 }
 
-ul li:hover{
+nav ul li:hover{
     background-color: rgb(20, 20, 20);
     font-size: 1.1rem;
-
+    cursor: pointer;
 }
