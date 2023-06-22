@@ -1,11 +1,13 @@
 // Importar componentes de React
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // Hook useState => Agrega estado a un componente funcional.
 
 // Importar componentes propios
 import Nav from './components/Nav';
 import AgregarTareasForm from './components/forms/agregarTareasForm';
 import Tareas from './components/Tareas';
+
+import { getTasks } from './api/tareasApi';
 
 // Importar CSS Global
 import './App.css';
@@ -14,11 +16,28 @@ function App() {
 
   // ` tareas` => Valor inicial -> useState( valorInicial )
   // `setTareas`: función que actualiza el estado de `tareas`
-  const [tareas, setTareas] = useState([
-  ]);
+  const [tareas, setTareas] = useState([]);
   // Estado del componente: inmutable
 
   const [mostrarTodas, setMostrarTodas] = useState(false);
+  
+  // Ejecuta al crear el componente
+  useEffect(() => {
+    const obtenerTareas = async () => {
+
+      const tasks = await getTasks(tareas);
+  
+      if (tasks) {
+        setTareas(tasks);
+      }else{
+        setTareas([]);
+        setError(true);
+      }
+    };
+
+    // Obtiene las tareas del backend
+    obtenerTareas();
+  }, []);
 
   // Recibe como parámetro el objeto `New Task` desde el componente `AgregarTareasForm`
   const agregarTarea = (nuevaTarea) => {

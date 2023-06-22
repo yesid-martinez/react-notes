@@ -36,3 +36,41 @@ Este repositorio incluye ejemplos de uso de Hooks en React. Para ver cómo funci
 
 # Task Manager (Gestor de tareas)
 Para facilitar el entendimiento de los apuntes, se implementó un task manager sencillo en el proyecto. Este task manager permite agregar, eliminar y marcar tareas como terminadas. Además, utiliza un estilo CSS simple.
+
+# Backend testing
+
+ Realizaremos una prueba de backend utilizando la librería json-server y peticiones REST API con axios.
+
+## Prueba de backend con json-server
+
+La librería json-server nos permite simular un servidor backend utilizando un archivo JSON (db.json) como base de datos.
+
+Se genera el archivo package.json ejecutando el comando:
+
+`npm init -y`
+
+Para instalar json-server, ejecuta el comando:
+
+`npm install -g json-server`
+
+Para iniciar el servidor json-server y utilizar el archivo db.json como base de datos, ejecuta el comando:
+
+`json-server --watch db.json`
+
+También podemos definir un script de inicio:
+`"scripts": {
+    "start": "json-server --watch db.json"
+}`
+
+Puedes ejecutar ese script utilizando el comando:
+
+`npm start`
+
+## Peticiones REST API con axios
+Para realizar peticiones REST API desde nuestro frontend, utilizaremos la librería axios.
+
+Para instalar axios ejecutamos el comando:
+
+`npm install axios`
+
+Una vez instalado, puedes utilizar axios para realizar peticiones GET, POST, PUT, DELETE, entre otras.
