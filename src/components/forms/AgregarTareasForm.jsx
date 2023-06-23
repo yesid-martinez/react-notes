@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { FaTasks } from 'react-icons/fa';
 
 import './agregarTareas.css';
@@ -24,7 +23,7 @@ const AgregarTareasForm = ({onAddTask}) => {
         const newTask = {
             titulo,
             terminada: false,
-            id: uuidv4(),
+            // El backend proporciona el id
         };
 
         // Invoca la función agregarTarea del componente padre mediante onAddTask

@@ -58,6 +58,7 @@ Para iniciar el servidor json-server y utilizar el archivo db.json como base de 
 `json-server --watch db.json`
 
 También podemos definir un script de inicio:
+
 `"scripts": {
     "start": "json-server --watch db.json"
 }`

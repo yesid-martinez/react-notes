@@ -7,7 +7,7 @@ import Nav from './components/Nav';
 import AgregarTareasForm from './components/forms/agregarTareasForm';
 import Tareas from './components/Tareas';
 
-import { getTasks } from './api/tareasApi';
+import { getTasks, addTask } from './api/tareasApi';
 
 // Importar CSS Global
 import './App.css';
@@ -31,7 +31,6 @@ function App() {
         setTareas(tasks);
       }else{
         setTareas([]);
-        setError(true);
       }
     };
 
@@ -40,9 +39,15 @@ function App() {
   }, []);
 
   // Recibe como parámetro el objeto `New Task` desde el componente `AgregarTareasForm`
-  const agregarTarea = (nuevaTarea) => {
-    // Actualiza el estado de las tareas con `setTareas`
-    setTareas( [... tareas, nuevaTarea] ); 
+  const agregarTarea = async (tarea) => {
+
+    const newTask = await addTask(tarea);
+
+      if (newTask){
+        setTareas([...tareas, newTask])
+      }else{
+        console.log("Hubo un error");
+      }
   };
 
   // Recibe como parámetro el valor id de la tarea desde el componente `Tarea`

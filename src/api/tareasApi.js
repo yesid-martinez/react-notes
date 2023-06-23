@@ -12,4 +12,16 @@ const getTasks = async () => {
     }
 };
 
-export {getTasks};
+const addTask = async (tarea) => {
+    try {
+        const response = await axios.post("http://localhost:3000/tareas/", tarea)
+        if (response.status === 201) {
+            return response.data
+        }
+    } catch (error) {
+        console.log("Hubo un error agregando la nueva tarea");
+        return null;
+    }
+};
+
+export {getTasks, addTask};

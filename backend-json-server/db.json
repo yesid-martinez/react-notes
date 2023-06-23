@@ -1,7 +1,9 @@
 {
-    "tareas": [
-        {
-            "titulo": "Ejemplo backend",
-            "terminada": false
-        }
-]}
+  "tareas": [
+    {
+      "titulo": "Frontend",
+      "terminada": false,
+      "id": 1
+    }
+  ]
+}
