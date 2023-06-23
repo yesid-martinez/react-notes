@@ -2,7 +2,7 @@
   "tareas": [
     {
       "titulo": "Frontend",
-      "terminada": false,
+      "terminada": true,
       "id": 1
     }
   ]

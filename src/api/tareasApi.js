@@ -36,4 +36,20 @@ const deleteTask = async (id) => {
     }
 };   
 
-export {getTasks, addTask, deleteTask};
+const doneTask = async (id) => {
+    try {
+        let tareas = await getTasks();
+        const tarea = tareas.find(tarea => tarea.id === id);
+        const tareaNueva = { terminada: !tarea.terminada};
+        const response = await axios.patch(`http://localhost:3000/tareas/${id}/`, tareaNueva);
+        if (response.status === 200 || response.status === 204){
+            return response.data;    
+        }      
+    } catch (error) {
+        console.error("Error al modificar el estado de la tarea");
+        return null;
+    }
+};
+
+
+export {getTasks, addTask, deleteTask, doneTask};

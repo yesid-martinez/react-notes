@@ -7,7 +7,7 @@ import Nav from './components/Nav';
 import AgregarTareasForm from './components/forms/agregarTareasForm';
 import Tareas from './components/Tareas';
 
-import { getTasks, addTask, deleteTask } from './api/tareasApi';
+import { getTasks, addTask, deleteTask, doneTask } from './api/tareasApi';
 
 // Importar CSS Global
 import './App.css';
@@ -52,7 +52,7 @@ function App() {
 
   // Recibe como parámetro el valor id de la tarea desde el componente `Tarea`
   const eliminarTarea = async (id) => {
-    
+
     const response = await deleteTask(id);
 
     if(response){
@@ -65,25 +65,17 @@ function App() {
       }
   };
 
-  const checkTask = (id) => {
-    setTareas( (currentState) => {
-      // Si la condición se cumple, se devuelve la tarea creando el atributo `tarea-terminada` con valor: `undefined`,
-      // `undefined` es un falsy value, por lo tanto, su opuesto será el valor`true`.
-      // Si la condición es falsa, se devuelve la tarea original sin realizar cambios.
-      return currentState.map( tarea => tarea.id === id ? {... tarea, terminada: !tarea.terminada } : tarea);
-    });
-  };
-
-  const markAsCompleted = (id) => {
-    setTareas((currentState) => {
-      return currentState.map((tarea) => {
-        // Si la tarea coincide con el ID proporcionado y no está marcada como terminada, la marca como terminada.
-        if (tarea.id === id) {
-          return { ...tarea, terminada: !tarea.terminada };
-        }
-        return tarea;
+  const markAsCompleted = async (id) => {
+    const response = await doneTask(id);
+    if (response) {
+      setTareas( (currentState) => {
+        const nuevasTareas = currentState.map( tarea =>
+          tarea.id === response.id ? {...tarea, terminada: response.terminada} : tarea);
+        return nuevasTareas;
       });
-    });
+    }else{
+      console.error("Hubo un error al modificar el estado de la tarea");
+    }
   };
 
   return (
@@ -114,7 +106,7 @@ function App() {
           <Tareas
           listaTareas={tareas}
           onDelete={eliminarTarea}
-          onToggle={checkTask}
+          onToggle={markAsCompleted}
           onCheckTask={markAsCompleted}
           mostrarTodas={mostrarTodas}
           setMostrarTodas={setMostrarTodas}
