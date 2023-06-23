@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import Nav from './components/Nav';
 import AgregarTareasForm from './components/forms/agregarTareasForm';
 import Tareas from './components/Tareas';
+import Error from './components/Error';
 
 import { getTasks, addTask, deleteTask, doneTask } from './api/tareasApi';
 
@@ -20,7 +21,9 @@ function App() {
   // Estado del componente: inmutable
 
   const [mostrarTodas, setMostrarTodas] = useState(false);
-  
+
+  const [error, setError] = useState(false);
+
   // Ejecuta al crear el componente
   useEffect(() => {
     const obtenerTareas = async () => {
@@ -31,6 +34,7 @@ function App() {
         setTareas(tasks);
       }else{
         setTareas([]);
+        setError(true);
       }
     };
 
@@ -46,6 +50,7 @@ function App() {
       if (newTask){
         setTareas([...tareas, newTask])
       }else{
+        setError(true);
         console.error("Hubo un error agregando la tarea");
       }
   };
@@ -61,6 +66,7 @@ function App() {
         return currentState.filter((tarea) => tarea.id !== id );  
       });
       }else{
+        setError(true);
         console.error("Hubo un error eliminando la tarea");
       }
   };
@@ -74,6 +80,7 @@ function App() {
         return nuevasTareas;
       });
     }else{
+      setError(true);
       console.error("Hubo un error al modificar el estado de la tarea");
     }
   };
@@ -112,6 +119,9 @@ function App() {
           setMostrarTodas={setMostrarTodas}
           />
         </div>
+
+        {/* Renderizado condicional */}
+        {error && <Error setError={setError}/>}
       </>
   )
 }

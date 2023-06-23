@@ -7,7 +7,7 @@ const getTasks = async () => {
             return response.data
         }
     } catch (error) {
-        console.error("Error en la petición");
+        console.error("Error en la petición", error);
         return null;
     }
 };
