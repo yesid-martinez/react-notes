@@ -7,7 +7,7 @@ import Nav from './components/Nav';
 import AgregarTareasForm from './components/forms/agregarTareasForm';
 import Tareas from './components/Tareas';
 
-import { getTasks, addTask } from './api/tareasApi';
+import { getTasks, addTask, deleteTask } from './api/tareasApi';
 
 // Importar CSS Global
 import './App.css';
@@ -46,19 +46,23 @@ function App() {
       if (newTask){
         setTareas([...tareas, newTask])
       }else{
-        console.log("Hubo un error");
+        console.error("Hubo un error agregando la tarea");
       }
   };
 
   // Recibe como parámetro el valor id de la tarea desde el componente `Tarea`
-  const deleteTask = (id) => {
-    // Modifica el estado de `tareas`
-    // La función dentro de setTareas recibe como parámetro el estado actual de las tareas (currentState)
-    setTareas( (currentState) => {
-      // Devuelve el nuevo estado actualizado => Devuelve todas las tareas a excepción de la tarea actual 
-      return currentState.filter((tarea) => tarea.id !== id );  
-    }); 
+  const eliminarTarea = async (id) => {
+    
+    const response = await deleteTask(id);
 
+    if(response){
+      setTareas( (currentState) => { 
+        // Devuelve el nuevo estado actualizado => Devuelve todas las tareas a excepción de la tarea indicada(id) 
+        return currentState.filter((tarea) => tarea.id !== id );  
+      });
+      }else{
+        console.error("Hubo un error eliminando la tarea");
+      }
   };
 
   const checkTask = (id) => {
@@ -109,7 +113,7 @@ function App() {
 
           <Tareas
           listaTareas={tareas}
-          onDelete={deleteTask}
+          onDelete={eliminarTarea}
           onToggle={checkTask}
           onCheckTask={markAsCompleted}
           mostrarTodas={mostrarTodas}
