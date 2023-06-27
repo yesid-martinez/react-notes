@@ -1,11 +1,14 @@
 // Importar componentes de React
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // Hook useState => Agrega estado a un componente funcional.
 
 // Importar componentes propios
 import Nav from './components/Nav';
 import AgregarTareasForm from './components/forms/agregarTareasForm';
 import Tareas from './components/Tareas';
+import Error from './components/Error';
+
+import { getTasks, addTask, deleteTask, doneTask } from './api/tareasApi';
 
 // Importar CSS Global
 import './App.css';
@@ -14,48 +17,72 @@ function App() {
 
   // ` tareas` => Valor inicial -> useState( valorInicial )
   // `setTareas`: función que actualiza el estado de `tareas`
-  const [tareas, setTareas] = useState([
-  ]);
+  const [tareas, setTareas] = useState([]);
   // Estado del componente: inmutable
 
   const [mostrarTodas, setMostrarTodas] = useState(false);
 
+  const [error, setError] = useState(false);
+
+  // Ejecuta al crear el componente
+  useEffect(() => {
+    const obtenerTareas = async () => {
+
+      const tasks = await getTasks(tareas);
+  
+      if (tasks) {
+        setTareas(tasks);
+      }else{
+        setTareas([]);
+        setError(true);
+      }
+    };
+
+    // Obtiene las tareas del backend
+    obtenerTareas();
+  }, []);
+
   // Recibe como parámetro el objeto `New Task` desde el componente `AgregarTareasForm`
-  const agregarTarea = (nuevaTarea) => {
-    // Actualiza el estado de las tareas con `setTareas`
-    setTareas( [... tareas, nuevaTarea] ); 
+  const agregarTarea = async (tarea) => {
+
+    const newTask = await addTask(tarea);
+
+      if (newTask){
+        setTareas([...tareas, newTask])
+      }else{
+        setError(true);
+        console.error("Hubo un error agregando la tarea");
+      }
   };
 
   // Recibe como parámetro el valor id de la tarea desde el componente `Tarea`
-  const deleteTask = (id) => {
-    // Modifica el estado de `tareas`
-    // La función dentro de setTareas recibe como parámetro el estado actual de las tareas (currentState)
-    setTareas( (currentState) => {
-      // Devuelve el nuevo estado actualizado => Devuelve todas las tareas a excepción de la tarea actual 
-      return currentState.filter((tarea) => tarea.id !== id );  
-    }); 
+  const eliminarTarea = async (id) => {
 
-  };
+    const response = await deleteTask(id);
 
-  const checkTask = (id) => {
-    setTareas( (currentState) => {
-      // Si la condición se cumple, se devuelve la tarea creando el atributo `tarea-terminada` con valor: `undefined`,
-      // `undefined` es un falsy value, por lo tanto, su opuesto será el valor`true`.
-      // Si la condición es falsa, se devuelve la tarea original sin realizar cambios.
-      return currentState.map( tarea => tarea.id === id ? {... tarea, terminada: !tarea.terminada } : tarea);
-    });
-  };
-
-  const markAsCompleted = (id) => {
-    setTareas((currentState) => {
-      return currentState.map((tarea) => {
-        // Si la tarea coincide con el ID proporcionado y no está marcada como terminada, la marca como terminada.
-        if (tarea.id === id) {
-          return { ...tarea, terminada: !tarea.terminada };
-        }
-        return tarea;
+    if(response){
+      setTareas( (currentState) => { 
+        // Devuelve el nuevo estado actualizado => Devuelve todas las tareas a excepción de la tarea indicada(id) 
+        return currentState.filter((tarea) => tarea.id !== id );  
       });
-    });
+      }else{
+        setError(true);
+        console.error("Hubo un error eliminando la tarea");
+      }
+  };
+
+  const markAsCompleted = async (id) => {
+    const response = await doneTask(id);
+    if (response) {
+      setTareas( (currentState) => {
+        const nuevasTareas = currentState.map( tarea =>
+          tarea.id === response.id ? {...tarea, terminada: response.terminada} : tarea);
+        return nuevasTareas;
+      });
+    }else{
+      setError(true);
+      console.error("Hubo un error al modificar el estado de la tarea");
+    }
   };
 
   return (
@@ -85,13 +112,16 @@ function App() {
 
           <Tareas
           listaTareas={tareas}
-          onDelete={deleteTask}
-          onToggle={checkTask}
+          onDelete={eliminarTarea}
+          onToggle={markAsCompleted}
           onCheckTask={markAsCompleted}
           mostrarTodas={mostrarTodas}
           setMostrarTodas={setMostrarTodas}
           />
         </div>
+
+        {/* Renderizado condicional */}
+        {error && <Error setError={setError}/>}
       </>
   )
 }
