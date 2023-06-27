@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getTasks = async () => {
     try {
-        const response = await axios.get("http://localhost:3000/tareas/");
+        const response = await axios.get(import.meta.env.VITE_BACKEND_URL);
         if (response.status === 200) {
             return response.data
         }
@@ -14,7 +14,7 @@ const getTasks = async () => {
 
 const addTask = async (tarea) => {
     try {
-        const response = await axios.post("http://localhost:3000/tareas/", tarea);
+        const response = await axios.post(import.meta.env.VITE_BACKEND_URL, tarea);
         if (response.status === 201) {
             return response.data
         }
@@ -26,9 +26,9 @@ const addTask = async (tarea) => {
 
 const deleteTask = async (id) => {
     try {
-       const response = await axios.delete(`http://localhost:3000/tareas/${id}`);
-       if (response.status === 200) {
-           return response.data;
+        const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}${id}`);
+        if (response.status === 200) {
+            return response.data;
         } 
     } catch (error) {
         console.error("Hubo un error eliminado la tarea");
@@ -41,7 +41,7 @@ const doneTask = async (id) => {
         let tareas = await getTasks();
         const tarea = tareas.find(tarea => tarea.id === id);
         const tareaNueva = { terminada: !tarea.terminada};
-        const response = await axios.patch(`http://localhost:3000/tareas/${id}/`, tareaNueva);
+        const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}${id}/`, tareaNueva);
         if (response.status === 200 || response.status === 204){
             return response.data;    
         }      

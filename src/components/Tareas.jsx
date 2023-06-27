@@ -8,7 +8,7 @@ const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle,
 
   // Controla los cambios en el componente para mostrar y ocultar el scrollbar
   useEffect(() => {
-    if (listaTareas.length < 6 && mostrarTodas) {
+      if (listaTareas.length <= 6 && mostrarTodas) {
       setMostrarTodas(false);
     }
   }, [listaTareas, mostrarTodas, setMostrarTodas]);
@@ -42,7 +42,7 @@ const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle,
             ) : <h3>You have {listaTareas.length} tasks available</h3>
           ) : null}
           
-          {listaTareas.length > 5 ? (
+          {listaTareas.length > 6 ? (
             <button onClick={() => {
               setMostrarTodas(true);
             }}>See complete list</button>
