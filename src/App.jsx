@@ -7,11 +7,36 @@ import Nav from './components/Nav';
 import AgregarTareasForm from './components/forms/agregarTareasForm';
 import Tareas from './components/Tareas';
 import Error from './components/Error';
+import SelectLenguage from './components/SelectLanguage';
 
+// Funciones API
 import { getTasks, addTask, deleteTask, doneTask } from './api/tareasApi';
+
+// Contextos
+import LocalizationContext from './context/LocalizationContext';
 
 // Importar CSS Global
 import './App.css';
+
+// Localization
+const local = {
+  es: {
+    title: "Administrador de tareas",
+    input: "Ingresa una nueva tarea",
+    save: "Guardar tarea",
+    show: "Ver la lista completa",
+    unavailable: "No hay tareas disponibles",
+    error: "Hubo un error, intente de nuevo."
+  },
+  en: {
+    title: "Tasks manager",
+    input: "Enter new task",
+    save: "Save task",
+    show: "See complete list",
+    unavailable: "There are no tasks available",
+    error: "There was an error. Try again."
+  },
+};
 
 function App() {
 
@@ -23,6 +48,8 @@ function App() {
   const [mostrarTodas, setMostrarTodas] = useState(false);
 
   const [error, setError] = useState(false);
+
+  const [language, setLanguage] = useState(local.en)
 
   // Ejecuta al crear el componente
   useEffect(() => {
@@ -85,17 +112,27 @@ function App() {
     }
   };
 
+  const handlerLanguageChange = (language) => {
+    if(language === "es"){
+      setLanguage(local.es)
+    }else{
+      setLanguage(local.en)
+    }
+  }
+
   return (
     <>
-      {/* HTML puro */}
+      {/* Definición de proveedor */}
+      {/* Provider: Envuelve los componentes que deseen acceder al contexto y proporciona el valor inicial. */}
+      {/* Se debe aplicar a toda la aplicación */}
+      <LocalizationContext.Provider value ={language}>
+      
       <header>
-        {/* CSS Inline */}
         <h1 style={{ color: "#c1c1c1" }}>React notes</h1>
-        <div>
-          {/* CSS mediante clases */}
-          <li className="link">Link</li>
-          <li className="link">Link</li>
-          <li className="link">Link</li>
+        <div className='header-elements'>
+          <li>Link</li>
+          <li>Link</li>
+          <SelectLenguage onLanguageChange={handlerLanguageChange}/>
         </div>
       </header>
 
@@ -122,6 +159,8 @@ function App() {
 
         {/* Renderizado condicional */}
         {error && <Error setError={setError}/>}
+        
+      </LocalizationContext.Provider>
       </>
   )
 }
