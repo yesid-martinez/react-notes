@@ -68,3 +68,7 @@ header{
 .language-en-selected{
   color: #5d7cea;
 }
+
+.language-fr-selected{
+  color: rgb(56, 203, 142);
+}
