@@ -1,14 +1,18 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { FaTasks } from 'react-icons/fa';
 
 import './agregarTareas.css';
+
+import LocalizationContext from '../../context/LocalizationContext';
 
 // ({onAddTask}) => Destructuración de objetos en los props
 const AgregarTareasForm = ({onAddTask}) => {
     
     // Modifica el texto mediante el estado del formulario     
     const [titulo, setTitulo] = useState("");
+
+    const { language } = useContext(LocalizationContext);
 
     // Crea la nueva tarea {}, se ejecuta cuando se envia el formulario
     const saveTask = (event) => {
@@ -32,15 +36,15 @@ const AgregarTareasForm = ({onAddTask}) => {
         setTitulo("");
     };
 
-  return (
+    return (
     <>
     <form>
-        <h2>Tasks manager <FaTasks size={40} style={{ margin: ' 10 0 0 10' }}/></h2>
+        <h2>{language.title} <FaTasks size={40} style={{ margin: ' 10 0 0 10' }}/></h2>
         <fieldset>
             <label htmlFor=""></label>
             <input
             type="text" 
-            placeholder="Enter new task"
+            placeholder={language.input}
             maxLength={40}  
             value={titulo}
             // El input tiene un valor vinculado al estado titulo.
@@ -50,13 +54,13 @@ const AgregarTareasForm = ({onAddTask}) => {
         </fieldset>
         <fieldset>
             <input type="submit"
-            value="Save task"
+            value={language.save}
             onClick={saveTask}
             />
         </fieldset>
     </form>
     </>
-  )
+)
 }
 
 export default AgregarTareasForm;

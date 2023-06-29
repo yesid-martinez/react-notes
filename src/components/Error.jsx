@@ -1,14 +1,20 @@
 import React from 'react';
+import { useContext } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
 import "./Error/error.css"
 
+import LocalizationContext from '../context/LocalizationContext';
+
 const Error = ({setError}) => {
+
+  const {language} = useContext(LocalizationContext);
+
   return (
     <div className='error-layout'>
         <div className='error'>
           <h3>Error!</h3>
-          <div>Hubo un error, intente de nuevo.</div>
+          <div>{language.error}</div>
         </div>
         <div className='error-icon'>
           <AiOutlineClose 

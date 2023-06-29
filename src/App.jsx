@@ -7,8 +7,14 @@ import Nav from './components/Nav';
 import AgregarTareasForm from './components/forms/agregarTareasForm';
 import Tareas from './components/Tareas';
 import Error from './components/Error';
+import SelectLenguage from './components/SelectLanguage';
 
+// Funciones API
 import { getTasks, addTask, deleteTask, doneTask } from './api/tareasApi';
+
+// Contextos
+import LocalizationContext from './context/LocalizationContext';
+import local from './context/ContextData';
 
 // Importar CSS Global
 import './App.css';
@@ -23,6 +29,8 @@ function App() {
   const [mostrarTodas, setMostrarTodas] = useState(false);
 
   const [error, setError] = useState(false);
+
+  const [language, setLanguage] = useState(local.en)
 
   // Ejecuta al crear el componente
   useEffect(() => {
@@ -84,18 +92,20 @@ function App() {
       console.error("Hubo un error al modificar el estado de la tarea");
     }
   };
-
+  
   return (
     <>
-      {/* HTML puro */}
+      {/* Definición de proveedor */}
+      {/* Provider: Envuelve los componentes que deseen acceder al contexto y proporciona el valor inicial. */}
+      {/* Se debe aplicar a toda la aplicación */}
+      <LocalizationContext.Provider value ={{language, setLanguage}}>
+      
       <header>
-        {/* CSS Inline */}
         <h1 style={{ color: "#c1c1c1" }}>React notes</h1>
-        <div>
-          {/* CSS mediante clases */}
-          <li className="link">Link</li>
-          <li className="link">Link</li>
-          <li className="link">Link</li>
+        <div className='header-elements'>
+          <li>Link</li>
+          <li>Link</li>
+          <SelectLenguage/>
         </div>
       </header>
 
@@ -122,6 +132,8 @@ function App() {
 
         {/* Renderizado condicional */}
         {error && <Error setError={setError}/>}
+        
+      </LocalizationContext.Provider>
       </>
   )
 }
