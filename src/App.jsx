@@ -1,6 +1,5 @@
 // Importar componentes de React
-import { useState, useEffect } from 'react';
-// Hook useState => Agrega estado a un componente funcional.
+import { useState, useEffect, useReducer } from 'react';
 
 // Importar componentes propios
 import Nav from './components/Nav';
@@ -9,22 +8,25 @@ import Tareas from './components/Tareas';
 import Error from './components/Error';
 import SelectLenguage from './components/SelectLanguage';
 
-// Funciones API
-import { getTasks, addTask, deleteTask, doneTask } from './api/tareasApi';
-
 // Contextos
 import LocalizationContext from './context/LocalizationContext';
 import local from './context/ContextData';
+
+// Reducers
+import tareasReducer from './reducers/TareasReducer';
+
+// Funciones API
+import { getTasks, addTask, deleteTask, doneTask } from './api/tareasApi';
+
 
 // Importar CSS Global
 import './App.css';
 
 function App() {
 
-  // ` tareas` => Valor inicial -> useState( valorInicial )
-  // `setTareas`: función que actualiza el estado de `tareas`
-  const [tareas, setTareas] = useState([]);
-  // Estado del componente: inmutable
+  // ` tareas`: Estado => useReducer( reducer, valorInicial )
+  // `dispatch`: Función que permite ejecutar acciones en el reducer
+  const [tareas, dispatch] = useReducer( tareasReducer, []);
 
   const [mostrarTodas, setMostrarTodas] = useState(false);
 
@@ -36,12 +38,13 @@ function App() {
   useEffect(() => {
     const obtenerTareas = async () => {
 
-      const tasks = await getTasks(tareas);
+      const tasks = await getTasks();
   
       if (tasks) {
-        setTareas(tasks);
+        // dipatch({ action })
+        dispatch({type: "CARGAR", tasks})
       }else{
-        setTareas([]);
+        dispatch({type: "CARGAR"})
         setError(true);
       }
     };
@@ -56,9 +59,9 @@ function App() {
     const newTask = await addTask(tarea);
 
       if (newTask){
-        setTareas([...tareas, newTask])
+        dispatch({type: "AGREGAR", newTask})
       }else{
-        setError(true);
+        setError(true); 
         console.error("Hubo un error agregando la tarea");
       }
   };
@@ -69,10 +72,7 @@ function App() {
     const response = await deleteTask(id);
 
     if(response){
-      setTareas( (currentState) => { 
-        // Devuelve el nuevo estado actualizado => Devuelve todas las tareas a excepción de la tarea indicada(id) 
-        return currentState.filter((tarea) => tarea.id !== id );  
-      });
+      dispatch({type: "ELIMINAR", id})
       }else{
         setError(true);
         console.error("Hubo un error eliminando la tarea");
@@ -82,11 +82,7 @@ function App() {
   const markAsCompleted = async (id) => {
     const response = await doneTask(id);
     if (response) {
-      setTareas( (currentState) => {
-        const nuevasTareas = currentState.map( tarea =>
-          tarea.id === response.id ? {...tarea, terminada: response.terminada} : tarea);
-        return nuevasTareas;
-      });
+      dispatch({type: "MODIFICAR", id})
     }else{
       setError(true);
       console.error("Hubo un error al modificar el estado de la tarea");
