@@ -8,13 +8,13 @@ import LocalizationContext from '../context/LocalizationContext';
 
 const Error = ({setError}) => {
 
-  const local = useContext(LocalizationContext);
+  const {language} = useContext(LocalizationContext);
 
   return (
     <div className='error-layout'>
         <div className='error'>
           <h3>Error!</h3>
-          <div>{local.error}</div>
+          <div>{language.error}</div>
         </div>
         <div className='error-icon'>
           <AiOutlineClose 

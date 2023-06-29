@@ -16,7 +16,7 @@ const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle,
   }, [listaTareas, mostrarTodas, setMostrarTodas]);
 
   // Accede al contexto de Localization
-  const local = useContext(LocalizationContext);
+  const {language} = useContext(LocalizationContext);
 
   return (
     <>
@@ -38,20 +38,16 @@ const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle,
       
         {listaTareas.length === 0 ? (
           // Uso del valor del contexto, accede al objeto
-          <div className='titulo-tareas-empty'>{local.unavailable}</div> 
+          <div className='titulo-tareas-empty'>{language.unavailable}</div> 
         ): null}
         
         <div className='card-footer'>    
-          {listaTareas.length !== 0 ? (
-            listaTareas.length === 1 ? (
-              <h3>You have 1 task available </h3>
-            ) : <h3>You have {listaTareas.length} tasks available</h3>
-          ) : null}
+          <h3>{language.tasks + listaTareas.length}</h3>
           
           {listaTareas.length > 6 ? (
             <button onClick={() => {
               setMostrarTodas(true);
-            }}>{local.show}</button>
+            }}>{language.show}</button>
             ) : null}
         </div>
     </div>
