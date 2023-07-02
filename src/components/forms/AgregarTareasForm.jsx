@@ -1,18 +1,21 @@
-import React from 'react'
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { FaTasks } from 'react-icons/fa';
 
 import './agregarTareas.css';
 
+// Importar custom hook
+import useInput from "../../hooks/useInput";
+
 import LocalizationContext from '../../context/LocalizationContext';
 
-// ({onAddTask}) => Destructuración de objetos en los props
+// eslint-disable-next-line react/prop-types
 const AgregarTareasForm = ({onAddTask}) => {
     
-    // Modifica el texto mediante el estado del formulario     
-    const [titulo, setTitulo] = useState("");
-
     const { language } = useContext(LocalizationContext);
+
+    // Estado del formulario con custom hook
+    const [titulo, blindTitulo, resetTitulo] = useInput("");
+    const [description, blindDescription, resetDescription] = useInput("");
 
     // Crea la nueva tarea {}, se ejecuta cuando se envia el formulario
     const saveTask = (event) => {
@@ -26,14 +29,17 @@ const AgregarTareasForm = ({onAddTask}) => {
         // Estructura de la nueva tarea
         const newTask = {
             titulo,
+            description,
             terminada: false,
-            // El backend proporciona el id
+            showDescription: false
         };
 
         // Invoca la función agregarTarea del componente padre mediante onAddTask
         // y pasa el objeto newTask como valor a agregarTarea
-        onAddTask(newTask); 
-        setTitulo("");
+        onAddTask(newTask);
+
+        resetTitulo("");
+        resetDescription("");
     };
 
     return (
@@ -45,13 +51,21 @@ const AgregarTareasForm = ({onAddTask}) => {
             <input
             type="text" 
             placeholder={language.input}
-            maxLength={40}  
-            value={titulo}
-            // El input tiene un valor vinculado al estado titulo.
-            // Se actualiza mediante la función setTitulo cuando su valor cambia.
-            onChange={event => setTitulo(event.target.value)}
+            maxLength={40}
+            {...blindTitulo}
             />
         </fieldset>
+
+        <fieldset>
+            <input
+            type="text"
+            placeholder={language.description}
+            maxLength={650}
+            id='description'
+            {...blindDescription} 
+            />
+        </fieldset>
+
         <fieldset>
             <input type="submit"
             value={language.save}

@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    flex-wrap: wrap;
     width: 100vw;
     height: 100%;
     margin-top: 2.5rem;
@@ -9,81 +10,91 @@
   
 .content-layout form{
     display: flex;
-    align-items: center;
     flex-direction: column;
-    width: 45vw;
+    align-items: center;
+    min-width: 45vw;
     height: 70vh;
+    margin-bottom: 2rem;
     background: linear-gradient(to top right, #1a1a1a, #000000);
     border-radius: 1rem;
     box-shadow: 4px 3px 3px rgba(255, 255, 255, 0.1);
+
+    & h2{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 6rem;
+      font-size: 2.6rem;
+      font-weight: 500;
+    }
   }
   
-.content-layout form h2{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 6rem;
-    font-size: 2.6rem;
-    font-weight: 500;
-  }
-  
-.content-layout form fieldset:first-of-type{
+  .content-layout fieldset:nth-of-type(1), fieldset:nth-of-type(2){
     display: flex;
     justify-content: center;
-    width: 90%;
     padding-top: 10px;
     border: none;
   }
   
-.content-layout form fieldset:first-of-type input{
-    width: 20rem;
-    height: 2.5rem;
-    border: none;
-    border-radius: 2px;
-    padding-left: 1rem;
-    transition: border-bottom-color .2s ease-in,
-    width .2s ease-in,
-    height .2s ease-in,
-    font-size .2s ease-in,
-    background-color .2s ease-in;
-    background-color: #1a1a1a;
-    border-bottom: 3px solid #393939;
-    color: #ffff;
+  .content-layout fieldset:nth-of-type(1), fieldset:nth-of-type(2){
+    & input{
+      width: 20rem;
+      height: 2.5rem;
+      padding-left: 1rem;
+      border: none;
+      border-radius: 2px;
+      background-color: #1a1a1a;
+      border-bottom: 3px solid #393939;
+      color: #ffff;
+
+      transition: border-bottom-color .2s ease-in,
+      width .2s ease-in,
+      height .2s ease-in,
+      font-size .2s ease-in,
+      background-color .2s ease-in;
+    }
   }
 
-.content-layout form fieldset:first-of-type input:focus{
-    outline: none;
-    width: 22rem;
-    height: 3rem;
-    font-size: 1.2rem;
-    border-bottom-color: #ffff;
-    background-color: #212121;
+  .content-layout fieldset:nth-of-type(1), fieldset:nth-of-type(2){
+    & input:focus{
+      outline: none;
+      width: 20.3rem;
+      height: 2.8rem;
+      font-size: 1.1rem;
+      border-bottom-color: #ffff;
+      background-color: #212121;
+    }
   }
 
-.content-layout form fieldset:first-of-type input::placeholder {
-    font-size: 1rem;
+  .content-layout fieldset:nth-of-type(1), fieldset:nth-of-type(2){
+    &input::placeholder{
+      font-size: 1rem;
+    }
   }
     
-.content-layout form fieldset:nth-of-type(2){
+  .content-layout fieldset:nth-of-type(3){
     display: flex;
     justify-content: center;
     width: 90%;
     border: none;
   }
 
-.content-layout form fieldset:nth-of-type(2) input{
-    width: 20rem;
-    height: 2.5rem;
-    border: none;
-    border-radius: 2px;
-    font-size: 1rem;
-    background: radial-gradient(circle, #787878 ,#474747);
-    color:  #000000;
-    transition: font-size .1s ease-in;
+.content-layout fieldset:nth-of-type(3){
+    & input{
+      width: 20rem;
+      height: 2.5rem;
+      border: none;
+      border-radius: 2px;
+      font-size: 1rem;
+      background: radial-gradient(circle, #787878 ,#474747);
+      color:  #000000;
+      transition: font-size .1s ease-in;
+    }
+
+    & input:hover{
+      background: radial-gradient(circle,#929191, #5f5f5f);
+      font-size: 1.05rem;
+      cursor: pointer;
+    }
   }
-.content-layout form fieldset:nth-of-type(2) input:hover{
-    background: radial-gradient(circle,#929191, #5f5f5f);
-    font-size: 1.05rem;
-    cursor: pointer;
-}

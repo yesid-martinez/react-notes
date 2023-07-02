@@ -16,6 +16,9 @@ const tareasReducer = (tareas, action) =>{
         case "ELIMINAR":
             return tareas.filter((tarea) => tarea.id !== action.id )
 
+        case "DESCRIPTION":
+            return tareas.map( tarea => tarea.id === action.id ? {...tarea, showDescription: !tarea.showDescription} : tarea)
+
         default:
             throw Error(`Acción no soportada:  ${action.type}`)
     }

@@ -16,7 +16,7 @@ import local from './context/ContextData';
 import tareasReducer from './reducers/TareasReducer';
 
 // Funciones API
-import { getTasks, addTask, deleteTask, doneTask } from './api/tareasApi';
+import { getTasks, addTask, deleteTask, doneTask, modifyDescription } from './api/tareasApi';
 
 
 // Importar CSS Global
@@ -89,6 +89,16 @@ function App() {
     }
   };
   
+  const showDescription = async (id) =>{
+    const response = await modifyDescription(id);
+    if(response){
+      dispatch({type: "DESCRIPTION", id})
+    }else{
+      setError(true);
+      console.error("Hubo un error al modificar el estado de la descripción");
+    }
+  };
+  
   return (
     <>
       {/* Definición de proveedor */}
@@ -123,6 +133,7 @@ function App() {
           onCheckTask={markAsCompleted}
           mostrarTodas={mostrarTodas}
           setMostrarTodas={setMostrarTodas}
+          onShowDescription={showDescription}
           />
         </div>
 

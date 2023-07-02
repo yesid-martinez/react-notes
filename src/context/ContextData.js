@@ -8,7 +8,9 @@ const local = {
         tasks: "Tareas disponibles: ",
         show: "Ver la lista completa",
         unavailable: "No hay tareas disponibles",
-        error: "Hubo un error, intente de nuevo."
+        error: "Hubo un error, intente de nuevo.",
+        errTitle: "¡Error!",
+        description: "Ingresa una descripción (Opcional)"
     },
     en: {
         lang: "English",
@@ -18,7 +20,9 @@ const local = {
         tasks: "Available tasks: ",
         show: "See complete list",
         unavailable: "There are no tasks available",
-        error: "There was an error. Try again."
+        error: "There was an error. Try again.",
+        errTitle: "¡Error!",
+        description: "Enter a description (Optional)"
     },
 
     fr: {
@@ -29,7 +33,9 @@ const local = {
         tasks : "Tâches disponibles: ",
         show : "Voir la liste complète",
         unavailable : "Aucune tâche disponible",
-        error : "Une erreur s'est produite, réessayez"
+        error : "Une erreur s'est produite, réessayez",
+        errTitle: "¡Erreur!",
+        description: "Saisissez une description (facultatif)"
     }
 };
 

@@ -38,7 +38,7 @@ const deleteTask = async (id) => {
 
 const doneTask = async (id) => {
     try {
-        let tareas = await getTasks();
+        const tareas = await getTasks();
         const tarea = tareas.find(tarea => tarea.id === id);
         const tareaNueva = { terminada: !tarea.terminada};
         const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}${id}/`, tareaNueva);
@@ -51,5 +51,19 @@ const doneTask = async (id) => {
     }
 };
 
+const modifyDescription = async (id) => {
+    try {
+        const tareas = await getTasks();
+        const tarea = tareas.find(tarea => tarea.id === id);
+        const tareaDescription = { showDescription: !tarea.showDescription};
+        const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}${id}/`, tareaDescription);
+        if (response.status === 200 || response.status === 204){
+            return response.data;    
+        }      
+    } catch (error) {
+        console.error("Error al modificar el estado de la descripción");
+        return null;
+    }
+}
 
-export {getTasks, addTask, deleteTask, doneTask};
+export {getTasks, addTask, deleteTask, doneTask, modifyDescription};

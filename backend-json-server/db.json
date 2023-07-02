@@ -1,8 +1,10 @@
 {
   "tareas": [
     {
-      "titulo": "Frontend",
-      "terminada": true,
+      "titulo": "New feature",
+      "description": "¡Now you can add a description to your tasks!",
+      "terminada": false,
+      "showDescription": true,
       "id": 1
     }
   ]

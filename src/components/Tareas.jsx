@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useContext } from 'react';
 
 import Tarea from './Tarea';
@@ -6,7 +5,8 @@ import './Tareas/tareas.css';
 
 import LocalizationContext from '../context/LocalizationContext';
 
-const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle, onCheckTask}) => {
+/* eslint-disable react/prop-types */
+const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle, onCheckTask, onShowDescription}) => {
 
   // Controla los cambios en el componente para mostrar y ocultar el scrollbar
   useEffect(() => {
@@ -31,6 +31,7 @@ const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle,
               onDeleteClick={onDelete}
               onToggle={onToggle}
               onCheckTask={onCheckTask}
+              onShowDescription={onShowDescription}
               />
             ))}
         </ul>
@@ -43,12 +44,6 @@ const Tareas = ({listaTareas, onDelete, mostrarTodas, setMostrarTodas, onToggle,
         
         <div className='card-footer'>    
           <h3>{language.tasks + listaTareas.length}</h3>
-          
-          {listaTareas.length > 6 ? (
-            <button onClick={() => {
-              setMostrarTodas(true);
-            }}>{language.show}</button>
-            ) : null}
         </div>
     </div>
     </>

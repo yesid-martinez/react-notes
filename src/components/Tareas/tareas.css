@@ -1,30 +1,101 @@
 .layout-lista-tareas{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    width: 45vw;
+    min-width: 45vw;
     height: 70vh;
+    margin-bottom: 2rem;
     background: linear-gradient(to top right, #1a1a1a, #000000);
     border-radius: 1rem;
     box-shadow: 4px 3px 3px rgba(255, 255, 255, 0.1);
     position: relative;
 }
 
-.task-quant{
-    margin: 0;
-}
-
 .lista-tareas{
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 10px;
-    width: 80%;
-    height: 100%;
-    margin-top: 50px;
+    height: 57vh;
+    padding: 0;
     overflow: hidden;
-    position: relative;
+}
+
+.lista-tareas li{
+    max-height: 15rem;
+    margin: 0 2rem;
+    font-size: 1rem;
+    font-weight: 300;
+    border-radius: 5px;
+    list-style: none;
+    font-style: oblique;
+    background: linear-gradient(to top right, #5b5b5b, #c2c2c2);
+    color: #000000;
+}
+
+.task-layout{
+    display: grid;
+    grid-template-columns: 1fr  3rem 3rem 3rem;
+    grid-template-rows: 3rem 1fr;
+    align-items: center;
+
+    & .task-title{
+        grid-column: 1;
+        grid-row: 1 / 2;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding-left: 2rem;
+
+        & .icon{
+            margin-right: .5rem;
+        }
+    }
+
+    & .task-check-icon{
+        grid-column: 2;
+        grid-row: 1 / 2;
+    }
+
+    & .task-descr-icon{
+        grid-column: 3;
+        grid-row: 1 / 2;
+    }
+    
+    & .task-delete-icon{
+        grid-column: 4;
+        grid-row: 1 / 2;
+    }
+}
+
+.task-description, .task-description-done{
+    display: flex;
+    align-items: center;
+    min-height: 3rem;
+    max-height: 9rem;
+    padding: .5rem 2rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: .9rem;
+}
+
+.task-description{
+    background-color: #c6c6c6;
+    color: #595959;
+}
+
+.task-description-done{
+    background-color: #666666;
+    color: #000000;
+    text-decoration:line-through;
+}
+
+.tarea-terminada{
+    background: none !important;
+    background: linear-gradient(to top right, #1b1b1b, #3d3d3d) !important;
+    color: #c4c4c4 !important;
+    text-decoration: line-through;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 .titulo-tareas-empty{
@@ -35,41 +106,17 @@
     font-size: 1.3rem;
 }
 
-.lista-tareas li{
-    display: grid;
-    grid-template-columns: 1fr  3rem 3rem;
-    align-items: center;
-    width: 30rem;
-    min-height: 3rem;
-    margin-left: -2.5rem;
-    padding-left: 3rem;
-    list-style: none;
-    font-size: 1rem;
-    font-weight: 300;
-    font-style: oblique;
-    background: linear-gradient(to top right, #5b5b5b, #c2c2c2);
-    color: #000000;
-    border-radius: 5px;
-}
-
-.tarea-terminada{
-    background: none !important;
-    background: linear-gradient(to top right, #1b1b1b, #3d3d3d) !important;
-    color: #c4c4c4 !important;
-    text-decoration: line-through;
-}
-
 .degradado-tareas {
     position: absolute;
     bottom: 5rem;
-    width: 35rem;
+    width: 100%;
     height: 30px;
     z-index: 1;
     background-image: linear-gradient(to top, rgb(36, 36, 36), rgba(255, 255, 255, 0));
     border-bottom: 2px solid rgb(154, 154, 154);
 }
 
-.lista-tareas.mostrar-todas{
+.lista-tareas{
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -78,12 +125,12 @@
     width: 6px;
     background-color: #484848;
 }
-  
+
 .lista-tareas::-webkit-scrollbar-thumb {
     background-color: #636363;
     border-radius: 5px;
 }
-  
+
 .lista-tareas::-webkit-scrollbar-thumb:hover {
     background-color: #919191;
 }
@@ -92,27 +139,10 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 100%;
-    height: 5rem;
+    height: 4rem;
 }
 
 .card-footer h3{
     font-weight: 400;
     font-size: 1.3rem;
-}
-
-.card-footer button{
-    width: 10rem;
-    height: 2rem;
-    border: none;
-    border-radius: 2px;
-    background: radial-gradient(circle, #787878 ,#474747);
-    color:  #000000;
-    transition: font-size .1s ease-in;
-    font-size: 1rem;
-}
-
-.card-footer button:hover{
-    background: radial-gradient(circle,#929191, #5f5f5f);
-    font-size: 1.05rem;
 }
