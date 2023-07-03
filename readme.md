@@ -89,3 +89,11 @@ Los nombres comunes para los archivos de variables de entorno son:
 `.env[nombre_entorno]` Archivo que contiene las variables de entorno específicas de un entorno en particular, como `.env.development` o `.env.production`.
 
 Estos archivos de variables de entorno se pueden colocar en el directorio raíz de tu proyecto Vite, y Vite los cargará automáticamente en función del entorno en el que se está ejecutando.
+
+### Cómo colaborar
+
+¡Tu colaboración es bienvenida! Si deseas contribuir a este repositorio, simplemente realiza un pull request con tus cambios propuestos. Agradezco cualquier contribución para mejorar este repositorio.
+
+## Contacto
+
+Si tienes alguna pregunta o sugerencia relacionada con mis apuntes, puedes contactarme a través de mi correo electrónico: [wujibifan.hh@gmail.com](mailto:wujibifan.hh@gmail.com)
